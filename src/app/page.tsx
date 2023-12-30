@@ -2,25 +2,35 @@
 
 import MembersArea from "@/components/MembersArea";
 import Main from "@/container/Main";
-import {useState} from "react"
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 
 interface RootState {
   isAuth: {
     auth: boolean;
   };
 }
+interface ShowAreaType {
+  isShow: {
+    show: boolean;
+  };
+}
 
 export default function Home() {
   const isAuth = useSelector((state:RootState) => state.isAuth.auth) 
+  const isShow = useSelector((state:ShowAreaType) => state.isShow.show)
+  const dispatch = useDispatch() 
   console.log(isAuth)
-  const [show, setShow] = useState(true)
+  
+  
+
   return (
       
         <div className="w-screen h-screen bg-slate-400 flex">
-          <Main></Main>
+          <Main showClass={isShow}></Main>
           {
-            !show ? <></> :<MembersArea></MembersArea>
+            !isShow ? <></> :<MembersArea></MembersArea>
           }
         </div>
       

@@ -94,8 +94,8 @@ const Register = () => {
   });
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center bg-slate-400 ">
-      <div className="bg-slate-600 w-[400px] h-[500px] p-12 relative text-white shadow-xl rounded-xl overflow-hidden">
+    <div className="w-screen h-screen flex items-center justify-center bg-neutral-500 ">
+      <div className="bg-neutral-700 w-[400px] h-[500px] p-12 relative text-white shadow-xl rounded-xl overflow-hidden">
         <h1 className="text-3xl pb-4">Register</h1>
         <hr />
         <form action="/register" method="POST" className="pt-4" onSubmit={submitForm}>
@@ -126,7 +126,12 @@ const Register = () => {
           <br />
           <input type="submit" value="Login" className="bg-emerald-500 w-[100px] p-1 mt-2" />
         </form>
+        <div className='flex bg-neutral-800 absolute bottom-0 left-0 w-full h-12 items-center pl-12 '>
+          <p>Do you have account?</p>
+          <p className='pl-8 cursor-pointer'onClick={()=> router.push("/login")}>Sign-in </p>
+        </div>
       </div>
+
     </div>
   );
 };

@@ -9,3 +9,43 @@ body{
   box-sizing: border-box;
 }
 
+.position-arrows{
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  transform: rotate(0);
+  cursor: pointer;
+}
+
+.position-arrows:hover{
+  scale: 1.2;
+  filter: drop-shadow(1px 3px 3px #fff);
+  transition: 300ms;
+}
+
+.position-arrows.show-off{
+  transform: rotate(180deg);
+}
+
+.input-search {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 4px;
+  margin: 0;
+  width: 100%; /* Ajuste conforme necessário */
+  border-bottom: 1px solid #000; /* Adicione uma linha horizontal na parte inferior */
+}
+
+.search-icon {
+  position: absolute;
+  right: 25px; /* Ajuste conforme necessário para alinhar o ícone à direita */
+  top: 50%; /* Ajuste conforme necessário para alinhar o ícone verticalmente */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.search-container {
+  position: relative;
+  margin: 25px 0;
+}

@@ -129,7 +129,7 @@ const Login = () => {
         </form>
         <div className='flex bg-neutral-800 absolute bottom-0 left-0 w-full h-12 items-center pl-12 '>
           <p>Have no account?</p>
-          <p className='pl-8 cursor-pointer'onClick={()=> router.push("/register")}>Sign-in </p>
+          <p className='pl-8 cursor-pointer'onClick={()=> router.push("/register")}>Sign-up </p>
         </div>
       </div>
     </div>
