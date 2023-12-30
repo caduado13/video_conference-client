@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Input from '@/components/form/Input';
+import { useDispatch } from 'react-redux';
+import { isAuthorization } from "@/app/redux/authState";
 
 
 interface UserData {
@@ -10,8 +12,12 @@ interface UserData {
   password: string
 }
 
+
 const Login = () => {
+  const {setAuth} = isAuthorization
+  const dispatch = useDispatch()
   const router = useRouter()
+
 
   const [userValue, setUserValue] = useState<string>("")
   const [passwordValue, setPasswordValue] = useState<string>("")
@@ -38,14 +44,17 @@ const Login = () => {
 
     try {
       const response = await fetch("http://localhost:3001/login", options);
-      console.log(response.statusText)
+
       if (!response.ok){
         const data = response.statusText;
         setErrState(data)
-        console.log(errState)
+
       }else{
+        const {token} = await response.json();
+        localStorage.setItem("token", token);
+        localStorage.setItem("username", postData.user);
+        dispatch(setAuth(true))
         router.push("/");
-        console.log(`${postData.user} logged`)
       }        
     } catch (error) {
       console.log(error);
@@ -64,8 +73,8 @@ const Login = () => {
 
 
   return (
-    <div className='w-screen h-screen flex items-center justify-center bg-slate-400 '>
-      <div className='bg-slate-600 w-[400px] h-[500px] p-12 relative text-white shadow-xl rounded-xl overflow-hidden'>
+    <div className="w-screen h-screen flex items-center justify-center bg-neutral-500 ">
+      <div className='bg-neutral-700 w-[400px] h-[500px] p-12 relative text-white shadow-xl rounded-xl overflow-hidden'>
         <h1 className='text-3xl pb-4'>Login</h1>
         <hr />
         <form action='/login' method='POST' className='pt-4' onSubmit={submitForm}>
@@ -118,7 +127,7 @@ const Login = () => {
             <br /> 
           <input type="submit" value="Login" className='bg-emerald-500 w-[100px] p-1 cursor-pointer mt-2' />
         </form>
-        <div className='flex bg-slate-900 absolute bottom-0 left-0 w-full h-12 items-center pl-12 '>
+        <div className='flex bg-neutral-800 absolute bottom-0 left-0 w-full h-12 items-center pl-12 '>
           <p>Have no account?</p>
           <p className='pl-8 cursor-pointer'onClick={()=> router.push("/register")}>Sign-in </p>
         </div>
