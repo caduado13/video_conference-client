@@ -1,38 +1,52 @@
 "use client"
+import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
+import Spinner from "@/components/Spinner";
 
-import MembersArea from "@/components/MembersArea";
-import Main from "@/container/Main";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+export default function HomeRoot() {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
 
+  const getRouter = async () => {
+    setLoading(true)
+    const token = sessionStorage.getItem("token");
+    
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+    try {
+      const response = await fetch("http://localhost:3001", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      if (!response.ok) {
+        throw new Error('Erro na requisição');
+      }
+      
+      const userData = await response.json();
 
-interface RootState {
-  isAuth: {
-    auth: boolean;
+      router.push("/home");
+    } catch (error) {
+      console.error('Erro:', error);
+    } finally {
+      setLoading(false);
+    }
   };
-}
-interface ShowAreaType {
-  isShow: {
-    show: boolean;
-  };
-}
 
-export default function Home() {
-  const isAuth = useSelector((state:RootState) => state.isAuth.auth) 
-  const isShow = useSelector((state:ShowAreaType) => state.isShow.show)
-  const dispatch = useDispatch() 
-  console.log(isAuth)
-  
-  
+
+useEffect(() => {
+  getRouter();
+}, []);
+
 
   return (
       
-        <div className="w-screen h-screen bg-slate-400 flex">
-          <Main showClass={isShow}></Main>
-          {
-            !isShow ? <></> :<MembersArea></MembersArea>
-          }
-        </div>
+        <>
+          {loading && <Spinner/> }
+        </>
       
   )
 }

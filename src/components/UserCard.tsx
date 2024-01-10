@@ -2,8 +2,8 @@ import React from 'react'
 
 const UserCard = () => {
   return (
-    <div>
-      CAARD
+    <div className="bg-red-600 card m-2">
+      
     </div>
   )
 }

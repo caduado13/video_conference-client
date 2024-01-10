@@ -49,3 +49,15 @@ body{
   position: relative;
   margin: 25px 0;
 }
+
+.teste{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px;
+}
+
+.card{
+  min-width: 400px;
+  min-height: 250px;
+}
+

@@ -1,27 +1,22 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Input from '@/components/form/Input';
-import { useDispatch } from 'react-redux';
-import { isAuthorization } from "@/app/redux/authState";
-
 
 interface UserData {
   user: string,
   password: string
 }
 
-
 const Login = () => {
-  const {setAuth} = isAuthorization
-  const dispatch = useDispatch()
   const router = useRouter()
 
 
   const [userValue, setUserValue] = useState<string>("")
   const [passwordValue, setPasswordValue] = useState<string>("")
-  const [errState, setErrState] = useState<string>("")
+  const [errState, setErrState] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   const handleUser = (e:React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -47,21 +42,22 @@ const Login = () => {
 
       if (!response.ok){
         const data = response.statusText;
-        setErrState(data)
-
+        setErrState(true) 
+        setLoading(false)
       }else{
         const {token} = await response.json();
-        localStorage.setItem("token", token);
-        localStorage.setItem("username", postData.user);
-        dispatch(setAuth(true))
-        router.push("/");
+        sessionStorage.setItem("token", token);
+        setErrState(false)
+        router.push("/home");
       }        
     } catch (error) {
-      console.log(error);
+      setErrState(true)
+      setLoading(false)
     }
   };
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true)
     e.preventDefault()
     const userData:UserData = {
       user: userValue,
@@ -76,10 +72,11 @@ const Login = () => {
     <div className="w-screen h-screen flex items-center justify-center bg-neutral-500 ">
       <div className='bg-neutral-700 w-[400px] h-[500px] p-12 relative text-white shadow-xl rounded-xl overflow-hidden'>
         <h1 className='text-3xl pb-4'>Login</h1>
+        {/* {loading ? <Spinner/>: <></>} */}
         <hr />
         <form action='/login' method='POST' className='pt-4' onSubmit={submitForm}>
 
-          {errState === "Unauthorized" || errState === "Bad Request"  ?
+          {errState  ?
           <>
             <Input 
             type = "text"
@@ -107,7 +104,7 @@ const Login = () => {
           onChange = {handleUser}
           value = {userValue}
           name = {""}
-          msg=""
+          msg={""}
           txtColor=""
           
           /> 
@@ -122,14 +119,12 @@ const Login = () => {
           />
           </>
           }
-
-          
             <br /> 
-          <input type="submit" value="Login" className='bg-emerald-500 w-[100px] p-1 cursor-pointer mt-2' />
+          <input type="submit" value={`${loading ? "Loading..." : "Login" }`} className={`bg-emerald-500 w-[100px] p-1 cursor-pointer mt-2 ${loading ? "pointer-events-none": "" }`} />
         </form>
         <div className='flex bg-neutral-800 absolute bottom-0 left-0 w-full h-12 items-center pl-12 '>
           <p>Have no account?</p>
-          <p className='pl-8 cursor-pointer'onClick={()=> router.push("/register")}>Sign-up </p>
+          <p className= {`pl-8 cursor-pointer`}onClick={()=> router.push("/register")}>Sign-up </p>
         </div>
       </div>
     </div>
