@@ -47,6 +47,7 @@ const Login = () => {
       }else{
         const {token} = await response.json();
         sessionStorage.setItem("token", token);
+        sessionStorage.setItem("username", postData.user);
         setErrState(false)
         router.push("/home");
       }        

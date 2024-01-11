@@ -27,10 +27,8 @@ const Main = ({showClass, }:{showClass:boolean}) => {
         <UserCard/>
         <UserCard/>
         <UserCard/>
-        <UserCard/>
-        <UserCard/>
       </div>
-      <BsFastForwardFill  size ={50} color = {"black"} onClick= {handleArea} className = {`position-arrows ${!showClass ? "show-off": ""}`}/>
+      <BsFastForwardFill  size ={35} color = {"black"} onClick= {handleArea} className = {`position-arrows ${!showClass ? "show-off": ""}`}/>
       <Sidebar></Sidebar>
     </div>
   )

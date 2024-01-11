@@ -1,10 +1,10 @@
 import React from 'react'
-import UserList from './UserList'
 
-const List = () => {
+
+const List = ({children}:{children:React.ReactNode}) => {
   return (
     <div className="mt-8">
-      <UserList usernameList={"cadu_siqueira"}/>
+      {children}
     </div>
   )
 }

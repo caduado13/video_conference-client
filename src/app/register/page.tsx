@@ -69,7 +69,6 @@ const Register = () => {
       alert("User register successful, you will be redirected to the login page!");
       router.push("/login");
     } 
-    console.log(userError)
   }, [userError]);
 
   useEffect(() => {
