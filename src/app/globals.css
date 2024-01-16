@@ -6,6 +6,7 @@
 body{
   padding: 0;
   margin: 0;
+  height: 100%;
   box-sizing: border-box;
 }
 
@@ -33,14 +34,14 @@ body{
   outline: none;
   padding: 4px;
   margin: 0;
-  width: 100%; /* Ajuste conforme necessário */
-  border-bottom: 1px solid #000; /* Adicione uma linha horizontal na parte inferior */
+  width: 100%; 
+  border-bottom: 1px solid #000; 
 }
 
 .search-icon {
   position: absolute;
-  right: 25px; /* Ajuste conforme necessário para alinhar o ícone à direita */
-  top: 50%; /* Ajuste conforme necessário para alinhar o ícone verticalmente */
+  right: 25px;
+  top: 50%; 
   transform: translateY(-50%);
   cursor: pointer;
 }
@@ -50,11 +51,11 @@ body{
   margin: 25px 0;
 }
 
-.teste{
-  
+.cards-container{
+  margin: auto;
+  max-width: 1280px;
   display: flex;
   flex-wrap: wrap;
-  padding: 30px;
 }
 
 .card{
@@ -71,6 +72,16 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
 }
 
+@media screen and (max-width: 768px) {
+  .cards-container{
+    max-width: 768px;
+    min-height: 100vh;
+    margin: auto;
+  }
+  .card{
+    min-width: 150px;
+    min-height: 180px;
+  }
+}

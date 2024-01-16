@@ -10,13 +10,11 @@ interface UserData {
 }
 
 const Login = () => {
-  const router = useRouter()
-
-
-  const [userValue, setUserValue] = useState<string>("")
-  const [passwordValue, setPasswordValue] = useState<string>("")
-  const [errState, setErrState] = useState<boolean>(false)
-  const [loading, setLoading] = useState<boolean>(false)
+  const router = useRouter();
+  const [userValue, setUserValue] = useState<string>("");
+  const [passwordValue, setPasswordValue] = useState<string>("");
+  const [errState, setErrState] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleUser = (e:React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

@@ -1,17 +1,17 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from 'next/navigation';
 import Spinner from "@/components/Spinner";
 
-import {useSelector, useDispatch} from "react-redux"
+import {useDispatch} from "react-redux"
 import { setUserName, setUserId } from "@/redux/users";
-import Cookie from "js-cookie"
+
 
 export default function HomeRoot() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
-  
   const dispatch = useDispatch()
+
   const getRouter = async () => {
     setLoading(true)
     const token = sessionStorage.getItem("token");
@@ -48,6 +48,8 @@ export default function HomeRoot() {
 useEffect(() => {
   getRouter();
 }, []);
+
+
 
 
   return (<>{loading && <Spinner/>}</>)

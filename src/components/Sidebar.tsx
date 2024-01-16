@@ -11,7 +11,6 @@ import { PiRecordFill } from "react-icons/pi";
 const Sidebar = () => {
   return (
     <div className='bg-neutral-900 absolute bottom-0 w-full h-14 px-16'>
-      
       <div className='flex justify-between h-full items-center'>
         <div className='flex'>
             <p className='px-3 flex flex-col items-center'>
@@ -29,7 +28,7 @@ const Sidebar = () => {
                 <span className='text-sm text-neutral-500'>Participantes</span>
             </p>
             <p className='px-3 flex flex-col items-center'>
-            <MdChat size = {23} className = "text-neutral-500" />
+                <MdChat size = {23} className = "text-neutral-500" />
                 <span className='text-sm text-neutral-500'>Chat</span>
             </p>
             <p className='px-3 flex flex-col items-center'>
